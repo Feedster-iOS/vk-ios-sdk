@@ -36,6 +36,7 @@
 #define ZAssert(condition, ...) do { if (!(condition)) { ALog(__VA_ARGS__); }} while(0)
 
 #import <SafariServices/SafariServices.h>
+#import <ExtensionApplication/ExtensionApplication.h>
 #import "VKSdk.h"
 #import "VKAuthorizeController.h"
 #import "VKRequestsScheduler.h"
@@ -172,14 +173,14 @@ static NSString *VK_ACCESS_TOKEN_DEFAULTS_KEY = @"VK_ACCESS_TOKEN_DEFAULTS_KEY_D
 
     if (vkApp) {
         
-        UIApplication *application = [UIApplication sharedApplication];
+        ExtensionApplication *application = [ExtensionApplication sharedApplication];
         
         // Since iOS 9 there is a dialog asking user if he wants to allow the running app
         // to open another app via URL. If user rejects, then no VK SDK callbacks are called.
         // Fixing this using new -[UIApplication openURL:options:completionHandler:] method (iOS 10+).
         
 #ifdef __AVAILABILITY_INTERNAL__IPHONE_10_0_DEP__IPHONE_10_0
-        if ([application respondsToSelector:@selector(openURL:options:completionHandler:)]) {
+        if ([ExtensionApplication.sharedApplication.UIApplication respondsToSelector:@selector(openURL:options:completionHandler:)]) {
             
             NSDictionary *options = @{ UIApplicationOpenURLOptionUniversalLinksOnly: @NO };
             
@@ -221,7 +222,7 @@ static NSString *VK_ACCESS_TOKEN_DEFAULTS_KEY = @"VK_ACCESS_TOKEN_DEFAULTS_KEY_D
 }
 
 + (BOOL)vkAppMayExists {
-    return [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:VK_AUTHORIZE_URL_STRING]];
+    return [[ExtensionApplication sharedApplication] canOpenURL:[NSURL URLWithString:VK_AUTHORIZE_URL_STRING]];
 }
 
 #pragma mark Access token

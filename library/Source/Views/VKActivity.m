@@ -24,6 +24,7 @@
 #import "VKBundle.h"
 #import "VKShareDialogController.h"
 #import "VKUtil.h"
+#import <ExtensionApplication/ExtensionApplication.h>
 
 NSString *const VKActivityTypePost = @"VKActivityTypePost";
 
@@ -37,7 +38,7 @@ NSString *const VKActivityTypePost = @"VKActivityTypePost";
 }
 
 + (BOOL)vkShareExtensionEnabled {
-    return [VKUtil isOperatingSystemAtLeastIOS8] && [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"vk-share://extension"]];
+    return [VKUtil isOperatingSystemAtLeastIOS8] && [[ExtensionApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"vk-share://extension"]];
 }
 
 - (NSString *)activityType {

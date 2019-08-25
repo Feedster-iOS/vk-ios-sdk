@@ -21,6 +21,7 @@
 //  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import <SafariServices/SafariServices.h>
+#import <ExtensionApplication/ExtensionApplication.h>
 
 #import "VKShareDialogController.h"
 #import "VKBundle.h"
@@ -249,7 +250,7 @@ static const CGFloat ipadHeight = 500.f;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+    UIInterfaceOrientation orientation = [[ExtensionApplication sharedApplication] statusBarOrientation];
     [self rotateToInterfaceOrientation:orientation appear:YES];
 }
 
