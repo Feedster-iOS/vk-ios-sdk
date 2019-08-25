@@ -14,4 +14,5 @@ Pod::Spec.new do |s|
   }
   s.frameworks    = 'Foundation','UIKit','SafariServices','CoreGraphics','Security'
   s.requires_arc = true
+  s.dependency 'ExtensionApplication'
 end
